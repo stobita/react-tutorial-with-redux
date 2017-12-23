@@ -7,7 +7,7 @@ const TutorialGame = props =>{
   return (
     <div className="contents">
       <h1>Marubatsu Game</h1>
-      <Board />
+      <Board squares={props.squares} squareClick={props.squareClick}/>
     </div>
   )
 }
@@ -20,21 +20,27 @@ const clickSquare = () => {
   }
 }
 
+const changeSquareValue = ( array, action ) => {
+
+}
+
 export const tutorialGameReducer = (state = {}, action) =>{
   switch(action.type){
     case CLICK_SQUARE:
       return {
         ...state,
-        value: action.value
+        value: changeSquareValue(state.squares, action.value)
       }
     default:
       return state
   }
 }
 
-
 const mapStateToProps = state => {
-  value: state.value
+  return{
+    value: state.value,
+    squares: state.squares
+  }
 }
 
 const mapDispatchToProps = dispatch => {

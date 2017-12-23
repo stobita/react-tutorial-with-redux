@@ -15,10 +15,11 @@ const Board = props => {
 
 const BoardRow = props => {
   return (
-    <div>
+    <div className="board-row">
       { props.rowValue.map((value) => {
         return <Square />
       })}
+      <br/>
     </div>
   )
 }

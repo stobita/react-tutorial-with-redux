@@ -3,8 +3,8 @@ import Board from '../components/Board'
 
 const TutorialGame = props =>{
   return (
-    <div>
-      <h1>Top</h1>
+    <div className="contents">
+      <h1>Marubatsu Game</h1>
       <Board />
     </div>
   )

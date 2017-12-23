@@ -5,3 +5,5 @@ const Square = props =>{
     <button className="square">a</button>
   )
 }
+
+export default Square

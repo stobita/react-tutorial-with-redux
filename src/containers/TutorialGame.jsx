@@ -1,8 +1,12 @@
 import React from 'react';
+import Board from '../components/Board'
 
 const TutorialGame = props =>{
   return (
-    <h1>TutorialGame</h1>
+    <div>
+      <h1>Top</h1>
+      <Board />
+    </div>
   )
 }
 

@@ -4,10 +4,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const TutorialGame = props =>{
+  console.log(props)
   return (
     <div className="contents">
       <h1>Marubatsu Game</h1>
-      <Board squares={props.squares} squareClick={props.squareClick}/>
+      <Board
+        squares={props.squares}
+        squareClick={props.squareClick}
+        squaresCount={props.squaresCount}
+      />
     </div>
   )
 }
@@ -38,8 +43,9 @@ export const tutorialGameReducer = (state = {}, action) =>{
 
 const mapStateToProps = state => {
   return{
-    value: state.value,
-    squares: state.squares
+    value: state.tutorialGame.value,
+    squares: state.tutorialGame.squares,
+    squaresCount: state.tutorialGame.squaresCount
   }
 }
 

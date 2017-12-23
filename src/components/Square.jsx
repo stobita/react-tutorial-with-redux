@@ -2,7 +2,6 @@ import React from 'react'
 
 const Square = props =>{
   const squareClick = () => {
-    alert(props.rowPosition)
     props.squareClick(
       props.squareValue,
       props.rowPosition,

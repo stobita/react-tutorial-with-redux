@@ -3,7 +3,7 @@ import React from 'react'
 const Square = props =>{
   const squareClick = () => {
     props.squareClick(
-      props.squareValue,
+      1,
       props.rowPosition,
       props.colPosition
     )

@@ -7,7 +7,7 @@ const Board = props => {
       { props.squares.map((row,index) => {
         return (
           <BoardRow
-            rowValue={row}
+            rowLine={row}
             squareClick={props.squareClick}
             rowPosition={index}
           />
@@ -20,7 +20,7 @@ const Board = props => {
 const BoardRow = props => {
   return (
     <div className="board-row">
-      { props.rowValue.map((value,index) => {
+      { props.rowLine.map((value,index) => {
         return(
           <Square
             squareValue={value}

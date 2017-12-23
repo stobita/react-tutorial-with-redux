@@ -4,13 +4,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const TutorialGame = props =>{
-  console.log(props)
   return (
     <div className="contents">
       <h1>Marubatsu Game</h1>
       <Board
         squares={props.squares}
-        squareClick={props.squareClick}
+        squareClick={props.clickSquare}
         squaresCount={props.squaresCount}
       />
     </div>
@@ -18,15 +17,21 @@ const TutorialGame = props =>{
 }
 
 const CLICK_SQUARE = 'CLICK_SQUARE'
-const clickSquare = () => {
+const clickSquare = (value, row, col) => {
   return {
     type: CLICK_SQUARE,
-    value
+    value,
+    row,
+    col
   }
 }
 
 const changeSquareValue = ( array, action ) => {
-
+  const newArray = array.map((value, index) =>{
+    return array[index].slice()
+  })
+  newArray[action.row][action.col] = action.value
+  return newArray
 }
 
 export const tutorialGameReducer = (state = {}, action) =>{
@@ -34,7 +39,7 @@ export const tutorialGameReducer = (state = {}, action) =>{
     case CLICK_SQUARE:
       return {
         ...state,
-        value: changeSquareValue(state.squares, action.value)
+        squares: changeSquareValue(state.squares, action)
       }
     default:
       return state

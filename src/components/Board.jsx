@@ -7,6 +7,7 @@ const Board = props => {
       { props.squares.map((row,index) => {
         return (
           <BoardRow
+            key={index}
             rowLine={row}
             squareClick={props.squareClick}
             rowPosition={index}
@@ -23,6 +24,7 @@ const BoardRow = props => {
       { props.rowLine.map((value,index) => {
         return(
           <Square
+            key={index}
             squareValue={value}
             squareClick={props.squareClick}
             colPosition={index}

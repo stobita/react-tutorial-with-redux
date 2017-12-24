@@ -98,7 +98,6 @@ export const tutorialGameReducer = (state = {}, action) =>{
 const calculateWinner = squares => {
   let winner;
   let rowMatch = false
-  console.log(checkDiagonal(squares))
   winner = checkDiagonal(squares) || checkCol(squares)
   if (!winner){
     squares.some((row, rowIndex) => {
@@ -136,7 +135,6 @@ const checkCol = array => {
     })
     if(match){
       winner = array[0][i]
-      console.log(winner)
       break
     }
   }

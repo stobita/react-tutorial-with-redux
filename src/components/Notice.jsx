@@ -10,8 +10,6 @@ const Notice = props => {
   } else {
     return null
   }
-  console.log(props.winner)
-
   return (
     <p>{dispValue}</p>
   )

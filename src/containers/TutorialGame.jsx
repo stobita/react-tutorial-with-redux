@@ -27,10 +27,12 @@ const clickSquare = (value, row, col) => {
 }
 
 const changeSquareValue = ( array, action ) => {
-  const newArray = array.map((value, index) =>{
-    return array[index].slice()
-  })
+  // const newArray = array.map((value, index) =>{
+  //   return array[index].slice()
+  // })
+  const newArray = array.slice()
   newArray[action.row][action.col] = action.value
+
   return newArray
 }
 

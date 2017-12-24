@@ -37,7 +37,9 @@ const changeSquareValue = ( array, action, isFirst ) => {
   // })
   const newArray = array.slice()
   const nowPlayer = isFirst ? "○" : "×"
-  newArray[action.row][action.col] = nowPlayer
+  if (newArray[action.row][action.col] === '　'){
+    newArray[action.row][action.col] = nowPlayer
+  }
 
   return newArray
 }

@@ -8,7 +8,8 @@ const rootReducer = combineReducers({
 const initialState = {
   tutorialGame: {
     squaresCount: 3,
-    squares: Array.from(new Array(3), () => new Array(3).fill(0))
+    squares: Array.from(new Array(3), () => new Array(3).fill('　')),
+    isFirst: true
   }
 }
 

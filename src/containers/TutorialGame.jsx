@@ -15,7 +15,7 @@ const TutorialGame = props =>{
           squareClick={props.clickSquare}
           squaresCount={props.squaresCount}
         />
-        <GameGuide isActive={props.isActive}/>
+        <GameGuide isActive={props.isActive} resetSquare={props.resetSquare}/>
         <GameResult winner={props.winner}/>
       </div>
     </div>
@@ -23,11 +23,17 @@ const TutorialGame = props =>{
 }
 
 const CLICK_SQUARE = 'CLICK_SQUARE'
+const RESET_SQUARE = 'RESET_SQUARE'
 const clickSquare = (row, col) => {
   return {
     type: CLICK_SQUARE,
     row,
     col
+  }
+}
+const resetSquare = () => {
+  return {
+    type: RESET_SQUARE
   }
 }
 
@@ -52,48 +58,33 @@ export const tutorialGameReducer = (state = {}, action) =>{
         squares: changeSquareValue(state.squares, action, state.isFirst),
         isFirst: !state.isFirst,
         winner: calculateWinner(state.squares),
-        isActive: calculateWinner(state.squares) || state.gameCount + 1 === state.squaresCount,
+        isActive: !(calculateWinner(state.squares) || state.gameCount + 1 === state.squaresCount),
         gameCount: state.gameCount + 1
+      }
+    case RESET_SQUARE:
+      return {
+        ...state,
+        squares: Array.from(new Array(3), () => new Array(3).fill('　')),
+        isActive: true,
+        gameCount: 0,
+        isFirst: true,
+        winner: null
       }
     default:
       return state
   }
 }
 
-const mapStateToProps = state => {
-  return{
-    value: state.tutorialGame.value,
-    squares: state.tutorialGame.squares,
-    squaresCount: state.tutorialGame.squaresCount,
-    isFirst: state.tutorialGame.isFirst,
-    winner: state.tutorialGame.winner,
-    isActive: state.tutorialGame.isActive,
-    gameCount: state.tutorialGame.gameCount
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ clickSquare }, dispatch)
-}
-
-// 横揃い判定
+// 勝敗判定
 const calculateWinner = squares => {
   let winner;
   let rowMatch = false
-  winner = checkDiagonal(squares)
-  winner = checkCol(squares)
+  console.log(checkDiagonal(squares))
+  winner = checkDiagonal(squares) || checkCol(squares)
   if (!winner){
     squares.some((row, rowIndex) => {
       let colMatch = true
       row.some((value, index, rowArray) => {
-        // if (rowIndex === 0){
-        //   // 縦チェック
-        //   if (checkCol(squares, index)){
-        //     rowMatch = true
-        //     winner = row[0][index]
-        //     return true
-        //   }
-        // }
         // 横チェック
         if (index + 1 < row.length){
           colMatch = (value !== '　' && value === rowArray[index + 1])
@@ -115,7 +106,6 @@ const calculateWinner = squares => {
 const checkCol = array => {
   let winner;
   for (let i = 0; i < array.length; i++){
-
     let match = false;
     array.some((row, rowIndex) => {
       if (rowIndex + 1 < array.length){
@@ -157,6 +147,22 @@ const checkDiagonal = (array) => {
     return array[0][array.length-1]
   }
   return null
+}
+
+const mapStateToProps = state => {
+  return{
+    value: state.tutorialGame.value,
+    squares: state.tutorialGame.squares,
+    squaresCount: state.tutorialGame.squaresCount,
+    isFirst: state.tutorialGame.isFirst,
+    winner: state.tutorialGame.winner,
+    isActive: state.tutorialGame.isActive,
+    gameCount: state.tutorialGame.gameCount
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ clickSquare, resetSquare }, dispatch)
 }
 
 export default connect(

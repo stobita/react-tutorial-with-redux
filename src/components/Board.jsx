@@ -3,7 +3,7 @@ import Square from './Square';
 
 const Board = props => {
   return (
-    <div classNmae="board">
+    <div className="board">
       { props.squares.map((row,index) => {
         return (
           <BoardRow

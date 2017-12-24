@@ -2,6 +2,7 @@ import React from 'react';
 import Board from '../components/Board'
 import GameResult from '../components/GameResult'
 import GameGuide from '../components/GameGuide'
+import SelectSquare from '../components/SelectSquare'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -18,12 +19,18 @@ const TutorialGame = props =>{
         <GameGuide isActive={props.isActive} resetSquare={props.resetSquare}/>
         <GameResult winner={props.winner}/>
       </div>
+      <SelectSquare
+        squaresCount={props.squaresCount}
+        squaresCountList={props.squaresCountList}
+        changeSquareCount={props.changeSquareCount}
+      />
     </div>
   )
 }
 
 const CLICK_SQUARE = 'CLICK_SQUARE'
 const RESET_SQUARE = 'RESET_SQUARE'
+const CHANGE_SQUARE_COUNT = 'CHANGE_SQUARE_COUNT'
 const clickSquare = (row, col) => {
   return {
     type: CLICK_SQUARE,
@@ -34,6 +41,12 @@ const clickSquare = (row, col) => {
 const resetSquare = () => {
   return {
     type: RESET_SQUARE
+  }
+}
+const changeSquareCount = (value) => {
+  return {
+    type: CHANGE_SQUARE_COUNT,
+    value
   }
 }
 
@@ -69,6 +82,12 @@ export const tutorialGameReducer = (state = {}, action) =>{
         gameCount: 0,
         isFirst: true,
         winner: null
+      }
+    case CHANGE_SQUARE_COUNT:
+      return {
+        ...state,
+        squaresCount: action.value,
+        squares: Array.from(new Array(Math.sqrt(action.value)), () => new Array(Math.sqrt(action.value)).fill('　')),
       }
     default:
       return state
@@ -157,12 +176,13 @@ const mapStateToProps = state => {
     isFirst: state.tutorialGame.isFirst,
     winner: state.tutorialGame.winner,
     isActive: state.tutorialGame.isActive,
-    gameCount: state.tutorialGame.gameCount
+    gameCount: state.tutorialGame.gameCount,
+    squaresCountList: state.tutorialGame.squaresCountList
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ clickSquare, resetSquare }, dispatch)
+  return bindActionCreators({ clickSquare, resetSquare, changeSquareCount }, dispatch)
 }
 
 export default connect(

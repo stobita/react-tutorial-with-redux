@@ -12,6 +12,12 @@ h1{
 
 .contents{
   text-align: center;
+  position: relative;
+  .board-wrapper{
+    margin-top: 20px;
+    position: relative;
+    padding: 15px 0;
+  }
   .board-row{
     height: 34px;
   }
@@ -29,6 +35,38 @@ h1{
     span{
       vertical-align: middle;
       line-height: 32px;
+    }
+  }
+  .board-cover{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #333;
+    margin: 0 auto;
+    width: 300px;
+    height: 100%;
+    opacity: 0.8;
+    button{
+      padding: 0;
+      border-radius: 5px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background-color: #333;
+      border: 2px solid white;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      color: white;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 50px;
+      line-height: 50px;
+      width: 200px;
     }
   }
 }

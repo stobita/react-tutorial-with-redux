@@ -1,8 +1,8 @@
 import React from 'react';
 import Board from '../components/Board'
-import GameResult from '../components/GameResult'
 import GameGuide from '../components/GameGuide'
 import SelectSquare from '../components/SelectSquare'
+import Notice from '../components/Notice'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -17,8 +17,8 @@ const TutorialGame = props =>{
           squaresCount={props.squaresCount}
         />
         <GameGuide isActive={props.isActive} resetSquare={props.resetSquare}/>
-        <GameResult winner={props.winner}/>
       </div>
+      <Notice isFirst={props.isFirst} winner={props.winner}/>
       <SelectSquare
         squaresCount={props.squaresCount}
         squaresCountList={props.squaresCountList}
